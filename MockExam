@@ -1,0 +1,40 @@
+import java.util.*;
+
+class Solution {
+	public int[] solution(int[] answers) {
+		int[] person1 = {1, 2, 3, 4, 5};	// 수포자1.
+		int[] person2 = {2, 1, 2, 3, 2, 4, 2, 5};	// 수포자2.
+		int[] person3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};		// 수포자3.
+		int[] score = new int[3];	// 점수.
+		int i;
+
+		// 수포자 3인방의 점수를 구함.
+		for(i = 0; i < answers.length; i++) {
+			if (answers[i] == person1[i%person1.length])
+				score[0]++;
+			if (answers[i] == person2[i%person2.length])
+				score[1]++;
+			if (answers[i] == person3[i%person3.length])
+				score[2]++;
+		}
+
+		int max = Math.max(score[0], Math.max(score[1], score[2]));	// 가장 높은 점수 max.
+
+		ArrayList<Integer> result = new ArrayList<Integer>();
+
+		// 가장 높은 점수를 받은 사람을 구함.
+		if (score[0] == max)
+			result.add(1);
+		if (score[1] == max)
+			result.add(2);
+		if (score[2] == max)
+			result.add(3);
+
+		// Integer형 ArrayList를 int형 배열로 바꿈.
+		int[] answer = new int[result.size()];
+		for (i = 0; i < answer.length; i++)
+			answer[i] = result.get(i).intValue();
+
+		return answer;
+	}
+}
